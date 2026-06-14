@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 800px;
+  max-width: 400px;
+  background-color: #00364a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* HEADER STYLES */
+
+.app_header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+
+  background-color: #00364a;
+  color: #fff;
+}
+
+.app_logo {
+  height: 50px;
+  width: 50px;
+}
+
+/* MAIN STYLES */
+
+.app_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  gap: 16px;
+
+  color: #00364a;
+
+  background-color: #f5f9fa;
+  flex-grow: 1;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: none; /* Скрывает скроллбар в Firefox */
+  -ms-overflow-style: none; /* Скрывает скроллбар в IE и Edge */
+}
+
+.app_main::-webkit-scrollbar {
+  display: none; /* Скрывает скроллбар в Chrome, Safari и Opera */
+}
+
+.app_main h2 {
+  font-size: 20px;
+  color: #00364a;
+}
+
+.app_main_lessons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  width: 100%;
+}
+
+.lesson_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+  box-shadow: 4px 4px 8px 0px #e1e1e1;
+  color: #fff;
+  background-color: #fff;
+  aspect-ratio: 1/1;
+}
+
+.lesson_btn h3 {
+  text-align: center;
+  font-size: 32px;
+}
+
+.hsk_1 {
+  background-color: #f7b518;
+}
+
+.hsk_2 {
+  background-color: #0194a6;
+}
+
+.hsk_3 {
+  background-color: #ec6e00;
+}
+
+.hsk_4 {
+  background-color: #bb1219;
+}
+
+.hsk_5 {
+  background-color: #003873;
+}
+
+.hsk_6 {
+  background-color: #641661;
+}
+
+/* FOOTER STYLES */
+
+.app_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+
+  background-color: #fff;
+  color: #00364a;
+  box-shadow: 0px -2px 10px 0px #e1e1e1;
+}
+
+.footer_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-style: none;
+  background-color: #fff;
+  color: #00364a;
+  height: 60px;
+  width: auto;
+}
+
+.footer_btn_active {
+  box-shadow: inset 0 -4px 0 0 #00364a;
+}
+
+.footer_btn_logo {
+  width: auto;
+  height: 20px;
+}
+
+.footer_btn_icon {
+  font-size: 20px;
+}
+
+/* LESSON BTN STYLE */
+
+.lesson {
+  width: 100%;
+  border: 2px solid #00364a;
+  border-radius: 16px;
+  box-shadow: 4px 4px 8px 0px #e1e1e1;
+  padding: 16px;
+  color: #00364a;
+  background-color: #fff;
+}
+
+/* WORDS CONTAINER STYLES */
+
+/* .app_main_words {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #00364a;
+} */
+
+.word_cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.word_cont p {
+  font-size: 72px;
+}
+
+.backward_btn {
+  padding: 48px 16px 48px 0;
+}
+
+.forward_btn {
+  padding: 48px 0 48px 16px;
+}
+
+.show_description_btn {
+  border-style: none;
+  height: 40px;
+  width: 100%;
+  /* border: 2px solid #158590; */
+  background-color: #0c9ca7;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 12px;
+  margin-top: auto;
+  box-shadow: 4px 4px 8px 0px #e1e1e1;
+}
+
+.word_meaning {
+  background-color: #fff;
+  width: 100%;
+
+  border-radius: 12px;
+  box-shadow: 4px 4px 8px 0px #e1e1e1;
+  overflow: hidden;
+}
+
+.word_meaning h3 {
+  background-color: #0c9ca7;
+  padding: 4px 8px;
+  color: #fff;
+}
+
+.word_meaning p {
+  padding: 8px 8px;
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Chinese</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- Script -->
+    <script src="data.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- HEAD -->
+    <header class="app_header">
+      <img src="img/Logo.svg" class="app_logo" />
+      <h1>Learn Chinese</h1>
+    </header>
+
+    <!-- MAIN -->
+    <main class="app_main">
+      <h2>Выберите уровень сложности</h2>
+      <div class="app_main_lessons">
+        <div class="lesson_btn hsk_1">
+          <h3>HSK<br />1</h3>
+        </div>
+        <div class="lesson_btn hsk_2">
+          <h3>HSK<br />2</h3>
+        </div>
+        <div class="lesson_btn hsk_3">
+          <h3>HSK<br />3</h3>
+        </div>
+        <div class="lesson_btn hsk_4">
+          <h3>HSK<br />4</h3>
+        </div>
+        <div class="lesson_btn hsk_5">
+          <h3>HSK<br />5</h3>
+        </div>
+        <div class="lesson_btn hsk_6">
+          <h3>HSK<br />6</h3>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app_footer">
+      <button
+        class="footer_btn footer_btn_words footer_btn_active"
+        data-value="words"
+      >
+        <img src="img/Logo_1.png" class="footer_btn_logo" />
+        <p>Слова</p>
+      </button>
+      <button class="footer_btn footer_btn_dialogs" data-value="dialogs">
+        <ion-icon name="chatbubbles-outline" class="footer_btn_icon"></ion-icon>
+        <p>Диалоги</p>
+      </button>
+      <button class="footer_btn footer_btn_repeat" data-value="repeat">
+        <ion-icon name="book-outline" class="footer_btn_icon"></ion-icon>
+        <p>Повторение</p>
+      </button>
+      <button class="footer_btn footer_btn_test" data-value="test">
+        <ion-icon name="trophy-outline" class="footer_btn_icon"></ion-icon>
+        <p>Тест</p>
+      </button>
+    </footer>
+  </body>
+</html>
