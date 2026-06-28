@@ -1,7 +1,9 @@
 // GLOBAL VARIABLES
 let activeBtn = "words";
 let letters = [];
+let dialogues = [];
 let wordsCounter = 0;
+let dialoguesCounter = 0;
 let currentLessonTitle = "";
 
 // DOM ELEMENTS VARIABLES
@@ -105,22 +107,68 @@ const renderWordView = function () {
 
 // Lesson click implementation
 
-const lessonClick = function (lessons, charachters) {
+const lessonClick = function (lessons, charachters, dial) {
   lessonBtns.forEach((btn) => {
     btn.addEventListener("click", function (event) {
       event.preventDefault();
-      wordsCounter = 0; // Сбрасываем счетчик при входе в урок
+
       const currentLesson = lessons.filter((lesson) => lesson.id === btn.id)[0];
       currentLessonTitle = `Урок ${currentLesson.lesson_number}. ${currentLesson.title_ru}`;
 
-      letters = charachters.filter((charachter) => {
-        const [level, lesson, char] = charachter.id.split("_");
-        const charachter_id = level + "_" + lesson;
-        return charachter_id === btn.id;
-      });
-      renderWordView();
+      switch (activeBtn) {
+        case "words":
+          wordsCounter = 0; // Сбрасываем счетчик при входе в урок
+
+          letters = charachters.filter((charachter) => {
+            const [level, lesson, char] = charachter.id.split("_");
+            const charachter_id = level + "_" + lesson;
+            return charachter_id === btn.id;
+          });
+          renderWordView();
+          break;
+
+        case "dialogs":
+          dialogsCounter = 0;
+          dialogues = dial.filter((dialogue) => dialogue.id === btn.id)[0]
+            .dialogues;
+          console.log(dialogues);
+          renderDialogsView(dialogues, dialogsCounter);
+          break;
+      }
     });
   });
+};
+
+const renderDialogsView = function (dialogues, dialogsCounter) {
+  let dialogueHtml = ``;
+
+  dialogues[dialoguesCounter].forEach(
+    (dialogue) =>
+      (dialogueHtml += `
+        <div class="dialogue_row">
+          <h3>${dialogue.speaker}: </h3>
+          <div>
+            <p>${dialogue.character}</p>
+            <p class="dialog_pinyin">${dialogue.pinyin}</p>
+            <p class="dialog_translation">${dialogue.translation}</p>
+          </div>
+        </div>
+    `),
+  );
+
+  const html = `
+  <div class="dialogue_cont">    
+    <div class="dialogue_window">
+        ${dialogues.length > 1 ? `<ion-icon name="chevron-back-outline" class="backward_btn"></ion-icon>` : ""}
+        
+        <div class="dialogue">${dialogueHtml}</div>
+        ${dialogues.length > 1 ? `<ion-icon name="chevron-forward-outline" class="forward_btn"></ion-icon>` : ""}
+        
+    </div>
+    <button class="show_description_btn"><h3>Показать значение</h3></button>
+  </div>
+  `;
+  appWindow.innerHTML = html;
 };
 
 // Делегирование события клика для кнопок HSK внутри appWindow
@@ -131,25 +179,65 @@ appWindow.addEventListener("click", function (event) {
   const forwardBtn = event.target.closest(".forward_btn");
   const backwardBtn = event.target.closest(".backward_btn");
 
+  const showDescriptionBtn = document.querySelector(".show_description_btn");
+
   if (hsk1Btn) {
     event.preventDefault();
     createLessonsList(hsk1_lessons);
-    lessonClick(hsk1_lessons, hsk1_characters);
+    lessonClick(hsk1_lessons, hsk1_characters, hsk1_dialogues);
   }
 
   if (forwardBtn) {
-    if (wordsCounter < letters.length - 1) {
-      wordsCounter += 1;
-      renderWordView();
+    switch (activeBtn) {
+      case "words":
+        if (wordsCounter < letters.length - 1) {
+          wordsCounter += 1;
+          renderWordView();
+        }
+        break;
+
+      case "dialogs":
+        if (dialoguesCounter < dialogues.length - 1) {
+          dialoguesCounter += 1;
+          renderDialogsView(dialogues, dialogsCounter);
+        }
+        break;
     }
   }
 
   if (backwardBtn) {
-    if (wordsCounter > 0) {
-      wordsCounter -= 1;
-      renderWordView();
+    switch (activeBtn) {
+      case "words":
+        if (wordsCounter > 0) {
+          wordsCounter -= 1;
+          renderWordView();
+        }
+        break;
+
+      case "dialogs":
+        if (dialoguesCounter > 0) {
+          dialoguesCounter -= 1;
+          renderDialogsView(dialogues, dialogsCounter);
+        }
+        break;
     }
   }
-});
 
-// Words lesson creation
+  if (activeBtn === "dialogs" && showDescriptionBtn) {
+    // Находим все элементы с классами .dialog_pinyin и .dialog_translation
+    const allDialogPinyin = document.querySelectorAll(".dialog_pinyin");
+    const allDialogTranslation = document.querySelectorAll(
+      ".dialog_translation",
+    );
+
+    // Переключаем класс 'hidden' для каждого найденного элемента
+    allDialogPinyin.forEach((el) => el.classList.toggle("hidden"));
+    allDialogTranslation.forEach((el) => el.classList.toggle("hidden"));
+    // Удаляем повторный вызов renderDialogsView, так как он перерисовывает весь контент
+  }
+
+  if (activeBtn === "words" && showDescriptionBtn) {
+    const wordMeaning = document.querySelector(".word_meaning");
+    wordMeaning.classList.toggle("hidden");
+  }
+});
