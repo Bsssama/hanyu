@@ -55,8 +55,8 @@ body {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   padding: 16px;
-  overflow-y: auto;
   overflow: hidden;
+  overflow-y: auto;
   min-height: 0;
   scrollbar-width: none; /* Скрывает скроллбар в Firefox */
   -ms-overflow-style: none; /* Скрывает скроллбар в IE и Edge */
